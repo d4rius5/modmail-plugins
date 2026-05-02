@@ -56,21 +56,20 @@ class Forward(commands.Cog):
         
 
     async def private(self, message):
+        files = []
+        for attachment in message.attachments:
+            file = await attachment.to_file()
+            files.append(file)
         ref = message.reference
         if ref is None:
             channel = self.bot.get_channel(1277792057632493591)
-            return await channel.send(message.content)
+            return await channel.send(message.content, files=files)
 
         if ref and ref.message_id:
             try:
                 replied = await message.channel.fetch_message(ref.message_id)
             except discord.NotFound:
                 replied = None
-
-        files = []
-        for attachment in message.attachments:
-            file = await attachment.to_file()
-            files.append(file)
 
         embed = replied.embeds[0]
         rep_id = int(embed.footer.text)
