@@ -19,17 +19,17 @@ class Forward(commands.Cog):
         await channel.send(msg, files=files)
         await ctx.message.add_reaction("✅")
 
-    @commands.command(name="forward", help="Forward a message + files(optional)", usage=".forward <message> & .forward <message> + <files>")
+    @commands.command(name="forward", help="Forward a message + files(optional)", usage="<message> & .forward <message> + <files>")
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def forward(self, ctx, *, msg):
         await self.send_forward(ctx, msg)
 
-    @commands.command(name="f", help="Forward a message + files(optional)", usage=".forward <message> & .forward <message> + <files>")
+    @commands.command(name="f", help="Forward a message + files(optional)", usage="<message> & .forward <message> + <files>")
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def f(self, ctx, *, msg):
         await self.send_forward(ctx, msg)
 
-    @commands.command(name="i", help="Forward just files with no message.", usage=".i <file/s>")
+    @commands.command(name="i", help="Forward just files with no message.", usage="<file/s>")
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def i(self, ctx):
         files = []
