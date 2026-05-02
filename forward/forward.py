@@ -29,7 +29,7 @@ class Forward(commands.Cog):
         await self.send_forward(ctx, msg)
 
     @commands.command(name="i")
-    @check.has_permissions(PermissionLevel.SUPPORTER)
+    @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def i(self, ctx):
         files = []
         for attachment in ctx.message.attachments:
