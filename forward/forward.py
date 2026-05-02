@@ -37,6 +37,7 @@ class Forward(commands.Cog):
             files.append(file)
         channel = self.bot.get_channel(1277792057632493591)
         await channel.send(files=files)
+        await ctx.message.add_reaction("✅")
 
 
 async def setup(bot):
