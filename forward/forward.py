@@ -31,6 +31,16 @@ class Forward(commands.Cog):
     async def f(self, ctx, *, msg):
         await self.send_forward(ctx, msg)
 
+    @commands.command(name="i")
+    @check.has_permissions(PermissionLevel.SUPPORTER)
+    async def i(self, ctx):
+        files = []
+        for attachment in ctx.message.attachments:
+            file = await attachment.to_file()
+            files.append(file)
+        channel = self.bot.get_channel(1277792057632493591)
+        await channel.send(files=files)
+
 
 async def setup(bot):
     await bot.add_cog(Forward(bot))
