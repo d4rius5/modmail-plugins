@@ -15,10 +15,7 @@ class Forward(commands.Cog):
         for attachment in ctx.message.attachments:
             file = await attachment.to_file()
             files.append(file)
-        if msg:
-            await channel.send(msg, files=files)
-        else:
-            await channel.send(files=files)
+        await channel.send(msg, files=files)
         await ctx.message.add_reaction("✅")
 
     @commands.command(name="forward")
