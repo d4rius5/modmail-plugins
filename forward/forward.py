@@ -9,7 +9,7 @@ class Forward(commands.Cog):
         if ctx.channel != 1437884513702248519:
             return
         try:
-            channel = await self.bot.fetch_channel(1277792057632493591)
+            channel = await bot.fetch_channel(1277792057632493591)
 
             files = []
             for attachment in ctx.message.attachments:
