@@ -53,6 +53,7 @@ class Forward(commands.Cog):
         if channel is None:
             channel = await self.bot.fetch_channel(1437157847229009931)
         await channel.send(files=files, embed=embed)
+        await message.add_reaction("✅")
 
     async def private(self, message):
         ref = message.reference
@@ -71,11 +72,10 @@ class Forward(commands.Cog):
         channel = self.bot.get_channel(1277792057632493591)
         msg2 = await channel.fetch_message(rep_id)
         await msg2.reply(message.content)
+        await message.add_reaction("✅")
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.bot:
-            return
 
         if message.channel.id == 1277792057632493591:
             await self.public(message)
