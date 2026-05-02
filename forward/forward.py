@@ -81,7 +81,7 @@ class Forward(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
-        return
+            return
         if message.channel.id == 1277792057632493591:
             await self.public(message)
         elif message.channel.id == 1500135919225667675:
