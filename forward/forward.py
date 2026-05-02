@@ -22,4 +22,4 @@ class Forward(commands.Cog):
             await ctx.reply(e)
 
 async def setup(bot):
-    await bot.add_cog(Hello(bot))
+    await bot.add_cog(Forward(bot))
