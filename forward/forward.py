@@ -88,9 +88,6 @@ class Forward(commands.Cog):
             await self.private(message)
             await message.add_reaction("✅")
 
-        # IMPORTANT if you still want commands to work
-        await self.bot.process_commands(message)
-
 
 async def setup(bot):
     await bot.add_cog(Forward(bot))
