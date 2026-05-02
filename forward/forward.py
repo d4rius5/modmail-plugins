@@ -79,7 +79,6 @@ class Forward(commands.Cog):
 
         if message.channel.id == 1277792057632493591:
             await self.public(message)
-            await message.add_reaction("✅")
         elif message.channel.id == 1437157847229009931:
             await self.private(message)
             await message.add_reaction("✅")
