@@ -7,7 +7,7 @@ class Forward(commands.Cog):
     @commands.command()
     async def f(self, ctx, *, msg):
         try:
-            channel = await bot.fetch_channel(1277792057632493591)
+            channel = await self.bot.fetch_channel(1277792057632493591)
 
             files = []
             for attachment in ctx.message.attachments:
