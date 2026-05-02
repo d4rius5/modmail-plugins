@@ -39,7 +39,7 @@ class Forward(commands.Cog):
             files.append(file)
         channel = self.bot.get_channel(1277792057632493591)
         await channel.send(files=files)
-        
+        await message.add_reaction("✅")
 
     async def public(self, message):
         embed = discord.Embed(description=message.content)
@@ -72,17 +72,17 @@ class Forward(commands.Cog):
         channel = self.bot.get_channel(1277792057632493591)
         msg2 = await channel.fetch_message(rep_id)
         await msg2.reply(message.content)
-        await message.add_reaction("✅")
+        
 
     @commands.Cog.listener()
     async def on_message(self, message):
 
         if message.channel.id == 1277792057632493591:
             await self.public(message)
+            await message.add_reaction("✅")
         elif message.channel.id == 1437157847229009931:
             await self.private(message)
-
-        await message.add_reaction("✅")
+            await message.add_reaction("✅")
 
         # IMPORTANT if you still want commands to work
         await self.bot.process_commands(message)
