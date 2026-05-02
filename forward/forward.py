@@ -6,25 +6,28 @@ class Forward(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def send_forward(self, ctx, msg):
+        channel = self.bot.get_channel(1277792057632493591)
+
+        files = []
+        for attachment in ctx.message.attachments:
+            file = await attachment.to_file()
+            files.append(file)
+
+        await channel.send(msg, files=files)
+        await ctx.message.add_reaction("✅")
+
+    @commands.command(name="forward")
+    @checks.thread_only()
+    @checks.has_permissions(PermissionLevel.SUPPORTER)
+    async def forward(self, ctx, *, msg):
+        await self.send_forward(ctx, msg)
+
     @commands.command(name="f")
     @checks.thread_only()
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def f(self, ctx, *, msg):
-        try:
-            channel = await self.bot.fetch_channel(1277792057632493591)
-
-            files = []
-            for attachment in ctx.message.attachments:
-                file = await attachment.to_file()
-                files.append(file)
-
-            await channel.send(msg, files=files)
-
-            await ctx.message.add_reaction("✅")
-
-        except Exception as e:
-            await ctx.message.add_reaction("❌")
-            await ctx.reply(str(e))
+        await self.send_forward(ctx, msg)
 
 
 async def setup(bot):
