@@ -6,6 +6,8 @@ class Forward(commands.Cog):
 
     @commands.command()
     async def f(self, ctx, *, msg):
+        if ctx.channel != 1437884513702248519:
+            return
         try:
             channel = await self.bot.fetch_channel(1277792057632493591)
 
