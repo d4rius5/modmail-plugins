@@ -1,14 +1,15 @@
 from discord.ext import commands
+from core import checks
+from core.models import PermissionLevel
 
 class Forward(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="f")
+    @checks.thread_only()
+    @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def f(self, ctx, *, msg):
-        if ctx.channel.id != 1437884513702248519:
-            return
-
         try:
             channel = await self.bot.fetch_channel(1277792057632493591)
 
