@@ -40,6 +40,48 @@ class Forward(commands.Cog):
         await channel.send(files=files)
         await ctx.message.add_reaction("✅")
 
+    async def public(self, message):
+        embed = discord.Embed(description=message.content)
+        embed.set_author(name=message.author.name, icon_url=message.author.display_avatar.url)
+        embed.set_footer(text=str(message.id))
+        files = []
+        for attachment in message.attachments:
+            file = await attachment.to_file()
+            files.append(file)
+        channel = self.bot.get_channel(1437157847229009931)
+        if channel is None:
+            channel = await self.bot.fetch_channel(1437157847229009931)
+        await channel.send(files=files, embed=embed)
+
+    async def private(self, message):
+        ref = message.reference
+        if ref is None:
+            channel = self.bot.get_channel(1277792057632493591)
+            await channel.send(message.content)
+
+        if ref and ref.message_id:
+            try:
+                replied = await message.channel.fetch_message(ref.message_id)
+            except discord.NotFound:
+                replied = None
+
+        embed = replied.embeds[0]
+        rep_id = int(embed.footer.text)
+        channel = self.bot.get_channel(1277792057632493591)
+        msg2 = await channel.fetch_message(rep_id)
+        await msg2.reply(message.content)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+
+        if message.channel.id == 1277792057632493591:
+            await self.public(message)
+        elif message.channel.id == 1437157847229009931:
+            await self.private(message)
+
+        # IMPORTANT if you still want commands to work
+        await self.bot.process_commands(message)
+
 
 async def setup(bot):
     await bot.add_cog(Forward(bot))
