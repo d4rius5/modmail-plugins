@@ -18,13 +18,11 @@ class Forward(commands.Cog):
         await ctx.message.add_reaction("✅")
 
     @commands.command(name="forward")
-    @checks.thread_only()
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def forward(self, ctx, *, msg):
         await self.send_forward(ctx, msg)
 
     @commands.command(name="f")
-    @checks.thread_only()
     @checks.has_permissions(PermissionLevel.SUPPORTER)
     async def f(self, ctx, *, msg):
         await self.send_forward(ctx, msg)
