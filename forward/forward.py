@@ -58,7 +58,7 @@ class Forward(commands.Cog):
         ref = message.reference
         if ref is None:
             channel = self.bot.get_channel(1277792057632493591)
-            await channel.send(message.content)
+            return await channel.send(message.content)
 
         if ref and ref.message_id:
             try:
@@ -74,6 +74,8 @@ class Forward(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.author.bot:
+            return
 
         if message.channel.id == 1277792057632493591:
             await self.public(message)
