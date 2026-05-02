@@ -67,11 +67,16 @@ class Forward(commands.Cog):
             except discord.NotFound:
                 replied = None
 
+        files = []
+        for attachment in message.attachments:
+            file = await attachment.to_file()
+            files.append(file)
+
         embed = replied.embeds[0]
         rep_id = int(embed.footer.text)
         channel = self.bot.get_channel(1277792057632493591)
         msg2 = await channel.fetch_message(rep_id)
-        await msg2.reply(message.content)
+        await msg2.reply(message.content, files=files)
         
 
     @commands.Cog.listener()
