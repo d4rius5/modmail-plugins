@@ -7,6 +7,8 @@ class Forward(commands.Cog):
         self.bot = bot
 
     async def send_forward(self, ctx, msg):
+        if ctx.channel.id != 1437884513702248519:
+            return
         channel = self.bot.get_channel(1277792057632493591)
 
         files = []
